@@ -1,5 +1,6 @@
 package com.coolweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -206,10 +207,10 @@ public class WeatherActivity extends AppCompatActivity {
         forecastLayout.removeAllViews();
         for(Forecast forecast:weather.forecastList){
             View view= LayoutInflater.from(this).inflate(R.layout.forecast_item,forecastLayout,false);
-            TextView dataText=(TextView)view.findViewById(R.id.data_text);
-            TextView infoText=(TextView)view.findViewById(R.id.info_text);
-            TextView maxText=(TextView)view.findViewById(R.id.max_text);
-            TextView minText=(TextView)view.findViewById(R.id.min_text);
+            TextView dataText=view.findViewById(R.id.data_text);
+            TextView infoText=view.findViewById(R.id.info_text);
+            TextView maxText=view.findViewById(R.id.max_text);
+            TextView minText=view.findViewById(R.id.min_text);
             dataText.setText(forecast.date);
             infoText.setText(forecast.more.info);
             maxText.setText(forecast.tempareture.max);
@@ -227,5 +228,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent=new Intent(this,AutoUpdateService.class);
+        startService(intent);
     }
 }
